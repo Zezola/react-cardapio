@@ -6,7 +6,15 @@ export default function Cart({cartItems}) {
     <div className="cart">
       <h1>CART</h1>
        {
-        cartItems
+        cartItems.map((item) => {
+          return (
+            <div key={item.name}>
+              <p>{item.name}</p>
+              <p>{item.price}</p>
+              <p>{item.quantity}</p>
+            </div>
+          )
+        })
        }
       <button>CONFIRMAR</button>
     </div>
