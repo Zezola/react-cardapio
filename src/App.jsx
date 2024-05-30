@@ -6,25 +6,25 @@ import Cart from "./components/cart/Cart";
 import Menu from "./components/menu/Menu";
 
 function App() {
-  const [query, setQuery] = useState("");
-  let [l, setList] = useState([]);
+  const [cartItems, setCartItems] = useState([])
+  const [cartItem, setItem] = useState({name: "", price: 0, quantity: 0})
+  const handleInsertCartItem = (name, price) => {
+    setCartItems([...cartItems, {
+      name: name,
+      price: price
+    }])
+  }
   const menuItems = [
     {name: "XTudo", price: 13},
     {name: "XEgg", price: 12},
     {name: "XBurguer", price: 11}
   ]
-  const [cartItems, setCartItems] = useState([])
+  
   return (
     <div className="app">
-      <Menu menuItems = {menuItems} setCartItems = {setCartItems} cartItems = {cartItems}/>
+      <Menu menuItems = {menuItems} handleInsertCartItem={handleInsertCartItem} cartItems={cartItems}/>
       <h2>CART ITEMS </h2>
-      {cartItems}
       <Cart cartItems = {cartItems}/>
-      
-      {/* 
-      <Search onQuery={setQuery} onListUpdate={setList} />
-      <Container query={query} l={l} />
-  */}
     </div>
   );
 }

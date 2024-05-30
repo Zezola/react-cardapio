@@ -2,12 +2,9 @@ import { useState } from "react";
 import { pizzas } from "../../pizzas";
 import './Menu.css';
 
-const Menu = ({menuItems, setCartItems, cartItems}) => {
-  const [item, setItem] = useState()
-  function handleClick(clickedItem) {
-    setItem(clickedItem.name, clickedItem.price)
-    setCartItems([...cartItems, item])
-    
+const Menu = ({menuItems, handleInsertCartItem, cartItems}) => {
+  const handleClick = (name, price) => {
+    handleInsertCartItem(name, price)
   }
 
   return (
@@ -20,7 +17,7 @@ const Menu = ({menuItems, setCartItems, cartItems}) => {
             <div key={item.name}>
               <p>{item.name}</p>
               <p>{item.price}</p>
-              <button onClick={() => handleClick(item)}>COMPRAR</button>
+              <button onClick={() => handleClick(item.name, item.price)}>COMPRAR</button>
             </div>
             
           )
