@@ -18,8 +18,21 @@ function App() {
     } else {
       setCartItems([...cartItems, {name: item.name, price: item.price, quantity: 1}])
     }     
-     
-    }
+  }
+
+  const handlePlusButtonClick = (name) => {
+    setCartItems(prevCartItems => prevCartItems.map(item => 
+    item.name === name ? {...item, quantity: item.quantity + 1} : item))
+  }
+
+  const handleMinusButtonClick = (name) => {
+    setCartItems(prevCartItems => prevCartItems.map((item) => {
+      if (item.name === name && item.quantity > 0) {
+        return {...item, quantity: item.quantity - 1}
+      }
+      return item
+    }))
+  }
 
   const updateItemQuantity = (name) => {
     setCartItems(prevCartItems => prevCartItems.map(item => 
@@ -27,7 +40,7 @@ function App() {
   }
 
   const menuItems = [
-    {name: "xtudo", price: 13},
+    {name: "xTudo", price: 13},
     {name: "XEgg", price: 12},
     {name: "XBurguer", price: 11}
   ]
@@ -35,8 +48,7 @@ function App() {
   return (
     <div className="app">
       <Menu menuItems = {menuItems} handleInsertCartItem={handleInsertCartItem} cartItems={cartItems}/>
-
-      <Cart cartItems = {cartItems}/>
+      <Cart cartItems = {cartItems} handlePlusButtonClick={handlePlusButtonClick} handleMinusButtonClick={handleMinusButtonClick}/>
     </div>
   );
 }
